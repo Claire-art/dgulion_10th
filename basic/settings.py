@@ -55,6 +55,7 @@ ROOT_URLCONF = 'basic.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        #template 상속 세팅!!!!!!!!!!!!!!!!!!!!!!!!!
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -63,7 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                #template 상속 세팅
+                
 
             ],
         },
