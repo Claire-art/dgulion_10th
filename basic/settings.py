@@ -56,7 +56,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         #template 상속 세팅!!!!!!!!!!!!!!!!!!!!!!!!!
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'basic','templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,3 +127,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #STATIC 상속 설정
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'basic','static')
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
