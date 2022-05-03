@@ -19,9 +19,5 @@ from main import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #mainpage URL 연결하기 with 별명사용
-
-    # firstpage URL 연결하기 with 별명사용
-
-    # secondpage URL 연결하기 with 별명사용
+    path('',views.showmain,name='showmain')
 ]
