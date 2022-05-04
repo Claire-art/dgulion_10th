@@ -19,7 +19,6 @@ from main import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #mainpage URL 연결하기 with 별명사용
     path('', views.main, name="showmain"),
     path('posts/', views.posts, name="posts"),
     path('<str:id>', views.detail, name="detail"),
