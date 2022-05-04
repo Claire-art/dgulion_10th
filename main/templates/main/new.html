@@ -2,7 +2,7 @@
 % load static %
 {% block content %}
 
-<form action="{% url 'create' %}" method="post">
+<form action="{% url 'main:create' %}" method="post">
     {%csrf_token%}
     <p>제목 : <input type="text" name="title"></p>
     <p>작성자 : <input type="text" name="writer"></p>

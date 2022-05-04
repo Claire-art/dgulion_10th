@@ -25,6 +25,6 @@ def create(request):
     new_blog.pub_date = timezone.now()
     new_blog.body = request.POST['body']
     new_blog.save()
-    return redirect('detail', new_blog.id)
+    return redirect('main:detail', new_blog.id)
 
 
