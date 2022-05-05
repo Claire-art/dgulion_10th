@@ -35,7 +35,7 @@
             <h2>인스타그램</h2>
             <br>
             <div class="card" style="width: 120px; border: none;">
-                <a href="https://www.instagram.com/jua_life/" target="_blank" style="text-decoration: none;"><img class="card-img-top" src="https://t1.daumcdn.net/cfile/tistory/99B6AB485D09F2132A" width="10%"</a>
+                <a href="https://www.instagram.com/jua_life/" target="_blank" style="text-decoration: none;"><img class="card-img-top" src="https://t1.daumcdn.net/cfile/tistory/99B6AB485D09F2132A" width="10%"></a>
                 <div class="card-body">
                   <h5 class="card-title">@jua_life</h5>
                 </div>
@@ -44,6 +44,17 @@
         </section>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-
+    <div>
+        {% for blog in blogs %}
+        <div>
+            <h3>{{blog.title}}</h3>
+            {{blog.writer}}<br>
+            {{blog.summary}}
+            <a href="{% url 'detail' blog.id %}">자세히</a>
+            <br>
+        </div>
+        {% endfor %}
+    </div>
+    <h2><a href="{%url 'new'%}">글쓰기</a></h2>
+    <h1>글 목록</h1>
 {% endblock %}
