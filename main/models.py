@@ -11,8 +11,11 @@ class Post(models.Model) :
     pub_data = models.DateTimeField()
     body = models.TextField()
 
+
+'''
     def __str__(self):
         return self.title
 
     def summary(self):
         return self.body[:20]
+'''

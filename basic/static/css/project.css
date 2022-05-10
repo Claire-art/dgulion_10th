@@ -16,7 +16,7 @@ body {
     background-color: black;
 }
 
-h1 {
+.jua {
     font-size: 36px;
     font-weight: bold;
     font-style: italic;
@@ -29,7 +29,7 @@ h1 {
     transform: translate(0% , 0%);
 }
 
-h1::before {
+.jua::before {
     content: "멋사 10기 한주아 자기소개";
     position: absolute;
     top: 0;
