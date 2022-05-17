@@ -2,7 +2,7 @@
 
 * {
     font-family: 'Jua', sans-serif;
-    background-color: black;
+    background-color: rgb(255, 255, 255);
 }
 
 
@@ -13,10 +13,10 @@ body,h1,h2 {
 
 body {
     min-width: fit-content;
-    background-color: black;
+    background-color: rgb(255, 255, 255);
 }
 
-h1 {
+.jua {
     font-size: 36px;
     font-weight: bold;
     font-style: italic;
@@ -29,7 +29,7 @@ h1 {
     transform: translate(0% , 0%);
 }
 
-h1::before {
+.jua::before {
     content: "멋사 10기 한주아 자기소개";
     position: absolute;
     top: 0;
@@ -86,5 +86,4 @@ h3{
 h5{
   color: #ff9500;
 }
-
 
