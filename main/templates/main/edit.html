@@ -2,7 +2,7 @@
 % load static %
 {% block content %}
 
-<form action="{% url 'main:update' blog.id %}" method="post">
+<form action="{% url 'main:update' blog.id %}" method="post" enctype="multipart/form-data">
     {%csrf_token%}
     <p>제목 : <input type="text" name="title" value="{{blog.title}}"></p>
     <p>작성자 : <input type="text" name="writer" value="{{blog.writer}}"></p>
