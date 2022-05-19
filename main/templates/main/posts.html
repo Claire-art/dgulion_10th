@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block content %}
+    {% if user.is_authenticated %}
+
     <br>
     <h1>글 목록</h1><br>
     <div>
@@ -15,4 +17,8 @@
         </div>
         {% endfor %}
     </div>
+    {% else %}
+        <a href="{% url 'account_login' %}" class="btn btn-warning">로그인</a>
+        <a href="{% url 'account_signup' %}" class="btn btn-warning">회원가입</a>
+    {% endif %}
 {% endblock %}
