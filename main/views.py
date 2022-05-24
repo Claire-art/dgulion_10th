@@ -21,7 +21,7 @@ def new(request):
 def create(request):
     new_blog = Blog()
     new_blog.title = request.POST['title']
-    new_blog.writer = request.POST['writer']
+    new_blog.writer = request.user
     new_blog.pub_date = timezone.now()
     new_blog.body = request.POST['body']
     new_blog.image = request.FILES.get('image')
@@ -35,7 +35,7 @@ def edit(request , id):
 def update(request , id):
     update_blog = Blog.objects.get(id=id)
     update_blog.title = request.POST['title']
-    update_blog.writer = request.POST['writer']
+    update_blog.writer = request.user
     update_blog.pub_date = timezone.now()
     update_blog.body = request.POST['body']
     update_blog.image = request.FILES.get('image')
