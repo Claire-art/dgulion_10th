@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Blog
+from .models import Blog , Comment
 from django.utils import timezone
 
 
@@ -13,7 +13,9 @@ def posts(request):
 
 def detail(request, id):
     blog = get_object_or_404(Blog, pk = id)
-    return render(request, 'main/detail.html', {'blog':blog})
+    all_comments = blog.comments.all().order_by('-created_at')
+    return render(request, 'main/detail.html', {'blog':blog, 'comments':all_comments})
+
 
 def new(request):
     return render(request, 'main/new.html')
@@ -46,6 +48,15 @@ def delete(request,id):
     delete_blog = Blog.objects.get(id=id)
     delete_blog.delete()
     return redirect('main:posts')
+
+def create_comment(request, blog_id):
+    new_comment = Comment()
+    new_comment.writer = request.user
+    new_comment.content = request.POST['content']
+    new_comment.blog = get_object_or_404(Blog, pk = blog_id)
+    new_comment.save() 
+    return redirect('main:detail', blog_id)
+
 
 
 
