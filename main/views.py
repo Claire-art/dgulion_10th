@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Blog , Comment
 from django.utils import timezone
+from django.db import models
 
 
 # mainpage view 함수
@@ -57,3 +58,21 @@ def create_comment(request, blog_id):
     new_comment.blog = get_object_or_404(Blog, pk = blog_id)
     new_comment.save() 
     return redirect('main:detail', blog_id)
+
+def delete_comment(request,id):
+    comment = get_object_or_404(Comment, pk=id)
+    post_id = comment.blog.id
+    comment.delete()
+    return redirect('main:detail', post_id)
+
+def edit_comment(request, id):
+    edit_comment = Comment.objects.get(id = id)
+    return render(request, 'main/edit_comment.html', {'comment' : edit_comment})
+
+def update_comment(request, id):
+    print("update Comment content = " + request.POST['content'])
+    update_comment = Comment.objects.get(id = id)
+    update_comment.content = request.POST['content']
+    update_comment.update_at = models.DateTimeField(auto_now=True)
+    update_comment.save()
+    return redirect('main:detail', update_comment.blog.id)

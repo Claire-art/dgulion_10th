@@ -20,6 +20,8 @@
 {% endif %}
 <p>{{blog.body}}</p>
 
+
+
 <div>
     <form action="{%url 'main:create_comment' blog.id%}" method="POST">
         {%csrf_token%}
@@ -28,20 +30,40 @@
     </form>
 </div>
 
+
 <div>
     {% for comment in comments %}
-        <div>
+    <div>
         작성자 : {{comment.writer}}
         {{comment.content}}
-        <br><hr>
-        </div>
+
+        {% if user.is_authenticated %}
+            {% if user == comment.writer %}
+                <a href="{% url 'main:delete_comment' comment.id %}">삭제하기</a>
+                <a href="{% url 'main:edit_comment' comment.id %}">수정하기</a>
+            {% endif %}
+        {% endif %}
+        <br>
+        <hr>
+    </div>
     {% endfor %}
 </div>
+
+
+
     
-    
+{% if user.is_authenticated %}
+{% if user == post.writer %}
+
 <a href="{% url 'main:edit' blog.id %}">수정하기</a>
 <a href="{% url 'main:delete' blog.id %}">삭제하기</a>
 <br><br>
 <hr>
+
+{% endif %}
+{% endif %}
+
+
+
 <h5><a href="{% url 'main:posts' %}">목록</a></h5>
 {% endblock %}
