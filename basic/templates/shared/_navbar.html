@@ -19,14 +19,15 @@
               <li><a class="dropdown-item" href="{% url 'main:new' %}">게시글 작성</a></li>
             </ul>
           </li>
-          <!-- 좋아요, 싫어요 -->
+
+          {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'main:my_like' request.user.id %}">내 좋아요 목록</a>
-          </li>
-
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'main:my_dislike' request.user.id %}">내 싫어요 목록</a>
-        </li>
+      </li>
+      {% endif %}
 
           <!--로그인-->
                     <li class="nav-item dropdown">

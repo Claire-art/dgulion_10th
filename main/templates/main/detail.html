@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 
+
 <h1>{{blog.title}}</h1>
 {% if blog.writer %}
     {% if 'user' in blog.writer.username %}
@@ -35,7 +36,7 @@
         {% if post.like_count == 0 %}
             0개
         {% else %}
-            {{ post.like_count }}개
+            {{ blog.like_count }}개
          {% endif %}
         </span>
 </span>
@@ -91,7 +92,7 @@
         {% if post.dislike_count == 0 %}
             0개
         {% else %}
-            {{ post.dislike_count }}개
+            {{ blog.dislike_count }}개
          {% endif %}
         </span>
 </span>
