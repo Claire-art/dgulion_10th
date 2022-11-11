@@ -40,13 +40,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'club',
     'rest_framework',
+    'rest_framework.authtoken',
     'accounts',
+    'corsheaders',
     ]
 
 # 새로 추가할 내용
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.JWTAuthentication',
+    ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ]
 }
 
@@ -58,7 +64,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',     # CORS 관련 추가
 ]
+# CORS 관련 추가
+CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:3000'
+                         ,'http://localhost:3000']
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'project.urls'
 
@@ -145,3 +156,6 @@ REST_FRAMEWORK = {
         'accounts.authentications.JWTAuthentication',
     )
 }
+
+AUTH_USER_MODEL = 'accounts.User'
+
