@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+
+    <br>
+    <h1>글 목록</h1><br>
+    <div>
+
+        {% for blog in blogs %}
+        <div>
+            <h3>{{blog.title}}</h3>
+            {{blog.writer}}<br>
+            {{blog.summary}}<br>
+            <a href="{% url 'main:detail' blog.id %}">...자세히</a><hr>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <a href="{% url 'account_login' %}" class="btn btn-warning">로그인</a>
+        <a href="{% url 'account_signup' %}" class="btn btn-warning">회원가입</a>
+    {% endif %}
+{% endblock %}
