@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<h1>{{blog.title}}</h1>
+{% if blog.writer %}
+    {% if 'user' in blog.writer.username %}
+        <h3>작성자 : {{ blog.writer.last_name }} {{ blog.writer.first_name }}</h3>
+    {% else %}
+        <h3>작성자 : {{ blog.writer }}</h3>
+    {% endif %}
+{% else %}
+ <h3>작성자 : 알 수 없음</h3>
+{% endif %}
+
+날짜 : {{blog.pub_date}}
+<hr>
+{% if blog.image %}
+<p><img src="{{blog.image.url}}" alt="사진"></p>
+{% endif %}
+<p>{{blog.body}}</p>
+<!-- 좋아요 버튼 -->
+<span href="#" class="like" name ="{{post.id}}" value="Like">
+    {% if user in post.like_user_set.all %}
+        <div class="alt-service-icon">
+            <i class="fas fa-heart" id ="like-icon" style="color:red;"></i>
+        </div>
+    {% else %}
+            <div class="alt-service-icon">
+            <i class="far fa-heart" id ="like-icon" style="color:red;"></i>
+        </div>
+    {% endif %}
+        <span id="count-{{ post.id }}" class="alt-services-title font-alt">
+            좋아요
+        {% if post.like_count == 0 %}
+            0개
+        {% else %}
+            {{ blog.like_count }}개
+         {% endif %}
+        </span>
+</span>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+    $(".like").click(function(){
+        var pk=$(this).attr('name')
+        $.ajax({
+             type:'POST',
+            url:"{% url 'main:like_toggle' blog.pk %}",
+            data:{'pk':pk,'csrfmiddlewaretoken':'{{csrf_token}}'},
+            dataType:'json',
+            success:function(response){
+                if(response.like_count==null){
+                    alert('로그인이 필요합니다.');
+                     window.location.replace('/accounts/login/');
+                }
+                else{
+                    if(response.result=='like'){
+                       $('#like-icon').removeClass();
+                        $('#like-icon').addClass('fas fa-heart');
+                    }
+                    else{
+                         $('#like-icon').removeClass();
+                        $('#like-icon').addClass('far fa-heart');
+                     }
+                    $('#count-{{post.id}}').html('좋아요'+response.like_count+"개");
+                 }
+            },
+             error:function(request, status, error){
+                alert("로그인이 필요합니다.")
+                alert('code:'+request.status+'\n'+'message:'+request.responseText+"\n"+"error:"+error);
+            },
+         })
+    })
+</script>
+
+
+<!-- 싫어요 -->
+<span href="#" class="dislike" name ="{{post.id}}" value="Dislike">
+    {% if user in post.dislike_user_set.all %}
+        <div class="alt-service-icon">
+            <i class="fas fa-heart" id ="dislike-icon" style="color:rgb(72, 0, 255);"></i>
+        </div>
+    {% else %}
+            <div class="alt-service-icon">
+            <i class="far fa-heart" id ="dislike-icon" style="color:rgb(72, 0, 255);"></i>
+        </div>
+    {% endif %}
+        <span id="discount-{{ post.id }}" class="alt-services-title font-alt">
+            싫어요
+        {% if post.dislike_count == 0 %}
+            0개
+        {% else %}
+            {{ blog.dislike_count }}개
+         {% endif %}
+        </span>
+</span>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+    $(".dislike").click(function(){
+        var pk=$(this).attr('name')
+        $.ajax({
+             type:'POST',
+            url:"{% url 'main:dislike_toggle' blog.pk %}",
+            data:{'pk':pk,'csrfmiddlewaretoken':'{{csrf_token}}'},
+            dataType:'json',
+            success:function(response){
+                if(response.dislike_count==null){
+                    alert('로그인이 필요합니다.');
+                     window.location.replace('/accounts/login/');
+                }
+                else{
+                    if(response.result=='dislike'){
+                       $('#dislike-icon').removeClass();
+                        $('#dislike-icon').addClass('fas fa-heart');
+                    }
+                    else{
+                         $('#dislike-icon').removeClass();
+                        $('#dislike-icon').addClass('far fa-heart');
+                     }
+                    $('#discount-{{post.id}}').html('싫어요'+response.dislike_count+"개");
+                 }
+            },
+             error:function(request, status, error){
+                alert("로그인이 필요합니다.")
+                alert('code:'+request.status+'\n'+'message:'+request.responseText+"\n"+"error:"+error);
+            },
+         })
+    })
+</script>
+
+<!-- 댓글 -->
+<div>
+    <form action="{%url 'main:create_comment' blog.id%}" method="POST">
+        {%csrf_token%}
+        <textarea name="content" placeholder="댓글내용입력"></textarea>
+        <input type="submit" value="확인">
+    </form>
+</div>
+
+
+<div>
+    {% for comment in comments %}
+    <div>
+        작성자 : {{comment.writer}}
+        {{comment.content}}
+
+        {% if user.is_authenticated %}
+            {% if user == comment.writer %}
+                <a href="{% url 'main:delete_comment' comment.id %}">삭제하기</a>
+                <a href="{% url 'main:edit_comment' comment.id %}">수정하기</a>
+            {% endif %}
+        {% endif %}
+        <br>
+        <hr>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+    
+{% if user.is_authenticated %}
+{% if user == blog.writer %}
+
+<a href="{% url 'main:edit' blog.id %}">수정하기</a>
+<a href="{% url 'main:delete' blog.id %}">삭제하기</a>
+<br><br>
+<hr>
+
+{% endif %}
+{% endif %}
+
+
+
+<h5><a href="{% url 'main:posts' %}">목록</a></h5>
+{% endblock %}
+
+

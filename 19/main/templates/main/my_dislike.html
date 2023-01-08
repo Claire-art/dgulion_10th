@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <p style="font-weight:bold;">🐳 내 싫어요 목록 🐳</p>
+        <div class="row">
+            {% for dislike in dislike_list %}
+                <div class="col-md-3 col-6 item_list__card">
+                    <div class="card">
+                        {% if dislike.post.image %}
+                            <a href="#">
+                                <img src="{{ dislike.post.image.url }}" width="100%" height="300px" alt="...">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ dislike.post.title }}</h5>
+                                <a href="{% url 'main:detail' dislike.post.pk %}" class="btn btn-outline-primary">보러가기</a>
+                               </div>
+                        {% else %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ dislike.post.title }}</h5>
+                                <a href="{% url 'main:detail' dislike.post.pk %}" class="btn btn-outline-primary">보러가기</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
