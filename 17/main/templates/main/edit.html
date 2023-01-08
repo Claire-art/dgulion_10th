@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<form action="{% url 'main:update' blog.id %}" method="post" enctype="multipart/form-data">
+    {%csrf_token%}
+    <p>제목 : <input type="text" name="title" value="{{blog.title}}"></p>
+    <p>내용 : <textarea name="body" id="" cols="30" rows="10">{{blog.body}}</textarea></p>
+    <p>사진 :<input type = "file" name = "image" >{{blog.image}}</p>
+    <button type="submit">제출</button>
+</form>
+
+<a href="{% url 'main:delete' blog.id %}">이미지 삭제하기</a> <!-- 삭제하기는 구현 됨 엥 근데 미디어 삭제임.. 다시해봐야할듯-->
+<h5><a href="{% url 'main:posts' %}">목록</a></h5>
+{% endblock %}
