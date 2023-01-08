@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800&display=swap');
+
+* {
+    font-family: 'Jua', sans-serif;
+    background-color: rgb(255, 255, 255);
+}
+
+
+body,h1,h2 {
+    margin:0px;
+    padding:0px;
+}
+
+body {
+    min-width: fit-content;
+    background-color: rgb(255, 255, 255);
+}
+
+.jua {
+    font-size: 36px;
+    font-weight: bold;
+    font-style: italic;
+    color: hsl(35, 100%, 50%);
+    white-space: nowrap;
+    margin: 0;
+    color: transparent;
+    top: 50%;
+    left: 100%;
+    transform: translate(0% , 0%);
+}
+
+.jua::before {
+    content: "멋사 10기 한주아 자기소개";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    color: #ffa600;
+    overflow: hidden;
+    border-right: 1px solid #ff9500;
+    animation: typing 5s steps(31) infinite;
+  }
+  
+  @keyframes typing{
+    0% {
+      width: 0%;
+    }
+    50% {
+      width: 50%;
+    }
+    100% {
+      width: 0%;
+    }
+  }
+
+h2 {
+    font-size: 30px;
+    font-weight: light;
+    color: hsl(35, 100%, 50%);
+    border-bottom: 1px solid hsl(35, 100%, 50%);
+}
+
+.mainbox {
+    width: 1000px;
+    padding: 30px;
+    margin: 30px;
+    margin-right: auto;
+    margin-left: auto;
+    border: 1px solid hsl(36, 100%, 50%);
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+p {
+    color: hsl(35, 100%, 50%);
+}
+
+h3{
+    font-size: 36px;
+    font-weight: lighter;
+    font-style: italic;
+    color: hsl(35, 100%, 50%);
+
+}
+
+h5{
+  color: #ff9500;
+}
+
