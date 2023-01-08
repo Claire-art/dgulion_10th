@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<form action="{%url 'create'%}" method="post">
+    {%csrf_token%}
+    <p>제목: <input type="text" name = 'title' style="color: white;"></p>
+    <p>작성자 : <input type="text" name="writer" style="color: white;"></p>
+    <p>내용 : <textarea type = 'text' name="body" id = "" cols = '30' rows = '10' style="color: white;"></textarea>></p>
+    <button type="submit" style="color: white;">제출</button>
+</form>
+
+{% endblock %}
